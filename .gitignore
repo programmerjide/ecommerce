@@ -1,0 +1,118 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+# Test binary, build with `go test -c`
+*.test
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+# Dependency directories (remove the comment below to include it)
+vendor/
+# Go workspace file
+go.workspace
+# IDE/editor specific files
+.vscode/
+.idea/
+*.iml
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+# OS generated files
+.DS_Store
+Thumbs.db
+# Temporary files
+*.tmp
+*.swp
+# Coverage reports
+coverage.out
+# Environment variables file
+.env
+# Compiled object files
+*.o
+*.a
+# Static analysis reports
+*.lint
+# Generated documentation
+docs/gen/
+# Ignore build directories
+build/
+dist/
+# Ignore coverage directories
+coverage/
+# Ignore test result directories
+test_results/
+# Ignore generated files
+generated/
+# Ignore profiler output
+*.pprof
+# Ignore vendor binaries
+vendor/bin/
+# Ignore Go module cache
+/pkg/mod/
+# Ignore Go build cache
+/pkg/build/
+# Ignore temporary files created by editors
+*~#
+# Ignore backup files
+*.bak
+# Ignore compiled templates
+*.tmplc
+# Ignore IDE specific project files
+*.code-workspace
+# Ignore GoLand specific files
+.idea/
+# Ignore JetBrains IDE specific files
+*.iml
+# Ignore Eclipse IDE specific files
+.project
+.cproject
+# Ignore NetBeans IDE specific files
+.nb-gradle/
+# Ignore temporary files created by Go tools
+*.tmp
+# Ignore Go test cache
+testcache/
+# Ignore Go coverage HTML reports
+coverage_html/
+# Ignore Go coverage XML reports
+coverage_xml/
+# Ignore Go coverage JSON reports
+coverage_json/
+# Ignore Go coverage CSV reports
+coverage_csv/
+# Ignore Go coverage lcov reports
+coverage_lcov/
+# Ignore Go coverage badges
+coverage_badges/
+# Ignore Go coverage summaries
+coverage_summaries/
+# Ignore Go coverage details
+coverage_details/
+# Ignore Go coverage trends
+coverage_trends/
+# Ignore Go coverage comparisons
+coverage_comparisons/
+# Ignore Go coverage statistics
+coverage_statistics/
+# Ignore Go coverage visualizations
+coverage_visualizations/
+# Ignore Go coverage dashboards
+coverage_dashboards/
+# Ignore Go coverage alerts
+coverage_alerts/
+# Ignore Go coverage notifications
+coverage_notifications/
+# Ignore Go coverage integrations
+coverage_integrations/
+# Ignore Go coverage plugins
+coverage_plugins/
+# Ignore Go coverage extensions
+coverage_extensions/
+# Ignore Go coverage tools
+coverage_tools/
+# Ignore Go coverage frameworks
+coverage_frameworks/
+# Ignore Go coverage libraries
