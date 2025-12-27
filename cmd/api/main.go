@@ -10,13 +10,14 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"github.com/programmerjide/ecommerce/internal/server"
-	"golang.org/x/net/context"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
+
+	"github.com/programmerjide/ecommerce/internal/server"
+	"golang.org/x/net/context"
 
 	"github.com/gin-gonic/gin"
 	"github.com/programmerjide/ecommerce/internal/config"
