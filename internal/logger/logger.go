@@ -1,0 +1,18 @@
+package logger
+
+import (
+	"github.com/rs/zerolog"
+	"github.com/rs/zerolog/log"
+	"os"
+	"time"
+)
+
+func NewLogger() zerolog.Logger {
+	// Placeholder for logger initialization code
+	zerolog.TimeFieldFormat = time.RFC3339
+
+	if os.Getenv("GIN_MODE") != "release" {
+		log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr, TimeFormat: time.RFC3339})
+	}
+	return log.Logger
+}
