@@ -1,10 +1,12 @@
+// Description: This file initializes and configures the logger for the application using the zerolog package.
 package logger
 
 import (
-	"github.com/rs/zerolog"
-	"github.com/rs/zerolog/log"
 	"os"
 	"time"
+
+	"github.com/rs/zerolog"
+	"github.com/rs/zerolog/log"
 )
 
 func NewLogger() zerolog.Logger {

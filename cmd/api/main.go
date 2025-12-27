@@ -1,7 +1,15 @@
+// @title E-commerce API
+// @version 1.0.0
+// @description This is a sample e-commerce API server.
+// @termsOfService http://example.com/terms/
+// @contact.name API Support
+// @contact.url http://www.example.com/support
+// @contact.email
 package main
 
 import (
 	"database/sql"
+
 	"github.com/gin-gonic/gin"
 	"github.com/programmerjide/ecommerce/internal/config"
 	"github.com/programmerjide/ecommerce/internal/database"
@@ -16,7 +24,7 @@ func main() {
 		log.Fatal().Err(err).Msg("Failed to load configuration")
 	}
 
-	db, err := database.NewDatabase(cfg.Database)
+	db, err := database.NewDatabase(&cfg.Database)
 	if err != nil {
 		log.Fatal().Err(err).Msg("Failed to connect to database")
 	}

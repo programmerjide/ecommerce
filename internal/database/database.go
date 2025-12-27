@@ -1,14 +1,16 @@
+// Description: This file contains the database initialization logic for the e-commerce application.
 package database
 
 import (
 	"fmt"
+
 	"github.com/programmerjide/ecommerce/internal/config"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 )
 
-func NewDatabase(cfg config.DatabaseConfig) (*gorm.DB, error) {
+func NewDatabase(cfg *config.DatabaseConfig) (*gorm.DB, error) {
 	// Placeholder for database initialization code
 	dsn := fmt.Sprintf(
 		"host=%s port=%s user=%s password=%s dbname=%s sslmode=%s TimeZone=UTC",
