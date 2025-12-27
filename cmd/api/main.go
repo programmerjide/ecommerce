@@ -9,6 +9,14 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
+	"github.com/programmerjide/ecommerce/internal/server"
+	"golang.org/x/net/context"
+	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/programmerjide/ecommerce/internal/config"
@@ -43,5 +51,38 @@ func main() {
 
 	gin.SetMode(cfg.Server.GinMode)
 
-	log.Info().Msg("Starting server")
+	srv := server.NewServer(cfg, db, log)
+
+	router := srv.SetupRoutes()
+
+	httpServer := &http.Server{
+		Addr:         fmt.Sprintf(":%s", cfg.Server.Port),
+		Handler:      router,
+		ReadTimeout:  10 * time.Second,
+		WriteTimeout: 10 * time.Second,
+		IdleTimeout:  120 * time.Second,
+	}
+
+	// Starting the server in a goroutine so that we can handle graceful shutdown
+	// This is like new thread in Java
+	go func() {
+		log.Info().Msgf("Listening on port %s", cfg.Server.Port)
+		if err := httpServer.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Fatal().Err(err).Msg("Failed to start server")
+		}
+	}()
+
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+	<-quit
+	log.Info().Msg("Shutting down server...")
+
+	// The context is used to inform the server it has 5 seconds to finish
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	if err := httpServer.Shutdown(ctx); err != nil {
+		log.Fatal().Err(err).Msg("Server forced to shutdown")
+	}
+
+	log.Info().Msg("Shutdown database")
 }
