@@ -1,12 +1,13 @@
 package server
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/programmerjide/ecommerce/internal/config"
 	"github.com/programmerjide/ecommerce/internal/middleware"
 	"github.com/rs/zerolog"
 	"gorm.io/gorm"
-	"net/http"
 )
 
 type Server struct {
