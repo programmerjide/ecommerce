@@ -15,6 +15,8 @@ DB_HOST=localhost
 DB_PORT=5432
 DB_URL=postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable
 
+GOLANGCI_LINT := /opt/homebrew/bin/golangci-lint
+
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
@@ -63,7 +65,7 @@ migrate-create: ## Create a new migration (usage: make migrate-create name=creat
 
 lint: ## Run linter
 	@echo "🔍 Running linter..."
-	@golangci-lint run --timeout 5m
+	@$(GOLANGCI_LINT) run --timeout 5m
 
 format: ## Format code
 	@echo "💅 Formatting code..."
@@ -95,7 +97,7 @@ install-tools: ## Install development tools
 	@echo "🔧 Installing tools..."
 	@go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 	@go install github.com/golang-migrate/migrate/v4/cmd/migrate@latest
-	@go install github.com/cosmtrek/air@latest
+	@go install github.com/air-verse/air@latest
 	@go install golang.org/x/tools/cmd/goimports@latest
 
 dev: ## Run with hot reload

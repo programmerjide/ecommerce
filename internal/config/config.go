@@ -1,12 +1,15 @@
+// Description: This file contains the configuration structures and loading logic for the e-commerce application.
 package config
 
 import (
 	"fmt"
-	"github.com/joho/godotenv"
 	"os"
 	"time"
+
+	"github.com/joho/godotenv"
 )
 
+// Config holds the application configuration
 type Config struct {
 	Server   ServerConfig
 	Database DatabaseConfig
@@ -15,11 +18,13 @@ type Config struct {
 	Upload   UploadConfig
 }
 
+// ServerConfig holds server-related configuration
 type ServerConfig struct {
 	Port    string `default:"8080"`
 	GinMode string `default:"debug"`
 }
 
+// DatabaseConfig holds database-related configuration
 type DatabaseConfig struct {
 	Host     string `default:"localhost"`
 	Port     string `default:"5432"`
@@ -29,12 +34,14 @@ type DatabaseConfig struct {
 	SSLMode  string `default:"disable"`
 }
 
+// JWTConfig holds JWT-related configuration
 type JWTConfig struct {
 	Secret              string `default:"your_secret_key"`
 	ExpiresIn           time.Duration
 	RefreshTokenExpires time.Duration
 }
 
+// AWSConfig holds AWS-related configuration
 type AWSConfig struct {
 	Region          string `default:"us-east-1"`
 	AccessKeyID     string `default:"your_access_key_id"`
@@ -43,11 +50,13 @@ type AWSConfig struct {
 	S3Endpoint      string `default:"http://localstack:4566"`
 }
 
+// UploadConfig holds file upload-related configuration
 type UploadConfig struct {
 	Path        string `default:"./uploads"`
 	MaxFileSize int64  `default:"1048576"`
 }
 
+// LoadConfig loads configuration from environment variables and .env file
 func LoadConfig() (*Config, error) {
 	_ = godotenv.Load()
 	cfg := &Config{

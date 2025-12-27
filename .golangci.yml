@@ -1,10 +1,38 @@
+version: "2"
+
+run:
+  timeout: 5m
+  modules-download-mode: readonly
+
 linters-settings:
+  errcheck:
+    check-type-assertions: true
+
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - experimental
+      - opinionated
+      - performance
+      - style
+
+#  revive:
+#    rules:
+#      - name: exported
+#        disabled: true  # ✅ This actually disables it
+#      - name: package-comments
+#        disabled: true  # ✅ Disable package comment requirement too
+
   govet:
-    check-shadowing: true
+    enable:
+      - shadow
+
   gocyclo:
     min-complexity: 15
+
   dupl:
     threshold: 100
+
   goconst:
     min-len: 2
     min-occurrences: 2
@@ -13,23 +41,20 @@ linters:
   disable-all: true
   enable:
     - errcheck
-    - gosimple
     - govet
     - ineffassign
     - staticcheck
-    - typecheck
     - unused
     - gocyclo
-    - gofmt
     - misspell
-    - goconst
-    - bodyclose
+    - gocritic
+    - revive
+
+formatters:
+  enable:
+    - gofmt
+    - goimports
 
 issues:
-  exclude-use-default: false
   max-issues-per-linter: 0
   max-same-issues: 0
-
-run:
-  timeout: 5m
-  go: '1.25.3'
