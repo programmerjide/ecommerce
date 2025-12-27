@@ -54,24 +54,24 @@ func ErrorResponse(c *gin.Context, statusCode int, message string, err error) {
 	c.JSON(statusCode, response)
 }
 
-func BadRequestResponse(c *gin.Context, message string, err error) {
-	ErrorResponse(c, http.StatusBadRequest, message, err)
+func BadRequestResponse(c *gin.Context, message string) {
+	ErrorResponse(c, http.StatusBadRequest, message, nil)
 }
 
-func UnauthorizedResponse(c *gin.Context, message string, err error) {
-	ErrorResponse(c, http.StatusUnauthorized, message, err)
+func UnauthorizedResponse(c *gin.Context, message string) {
+	ErrorResponse(c, http.StatusUnauthorized, message, nil)
 }
 
-func ForbiddenResponse(c *gin.Context, message string, err error) {
-	ErrorResponse(c, http.StatusForbidden, message, err)
+func ForbiddenResponse(c *gin.Context, message string) {
+	ErrorResponse(c, http.StatusForbidden, message, nil)
 }
 
-func NotFoundResponse(c *gin.Context, message string, err error) {
-	ErrorResponse(c, http.StatusNotFound, message, err)
+func NotFoundResponse(c *gin.Context, message string) {
+	ErrorResponse(c, http.StatusNotFound, message, nil)
 }
 
-func InternalServerErrorResponse(c *gin.Context, message string, err error) {
-	ErrorResponse(c, http.StatusInternalServerError, message, err)
+func InternalServerErrorResponse(c *gin.Context, message string) {
+	ErrorResponse(c, http.StatusInternalServerError, message, nil)
 }
 
 func PaginatedSuccessResponse(c *gin.Context, message string, data interface{}, meta PaginationMeta) {
