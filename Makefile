@@ -53,11 +53,11 @@ clean: ## Clean build artifacts
 
 migrate-up: ## Run database migrations up
 	@echo "⬆️  Running migrations..."
-	@migrate -path migrations -database "$(DB_URL)" up
+	@migrate -path db/migrations -database "$(DB_URL)" up
 
 migrate-down: ## Rollback last migration
 	@echo "⬇️  Rolling back migration..."
-	@migrate -path migrations -database "$(DB_URL)" down 1
+	@migrate -path db/migrations -database "$(DB_URL)" down 1
 
 migrate-create: ## Create a new migration (usage: make migrate-create name=create_users)
 	@echo "📝 Creating migration: $(name)"

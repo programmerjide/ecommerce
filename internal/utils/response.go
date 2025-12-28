@@ -54,8 +54,8 @@ func ErrorResponse(c *gin.Context, statusCode int, message string, err error) {
 	c.JSON(statusCode, response)
 }
 
-func BadRequestResponse(c *gin.Context, message string) {
-	ErrorResponse(c, http.StatusBadRequest, message, nil)
+func BadRequestResponse(c *gin.Context, message string, err error) {
+	ErrorResponse(c, http.StatusBadRequest, message, err)
 }
 
 func UnauthorizedResponse(c *gin.Context, message string) {
