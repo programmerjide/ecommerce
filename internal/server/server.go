@@ -1,6 +1,8 @@
 package server
 
 import (
+	"github.com/programmerjide/ecommerce/internal/handler"
+	"github.com/programmerjide/ecommerce/internal/service"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -35,6 +37,52 @@ func (s *Server) SetupRoutes() *gin.Engine {
 
 	// Add routes here
 	router.GET("/health", s.healthCheckHandler)
+
+	authService := service.NewAuthService(s.db, s.config)
+
+	authHandler := handler.NewAuthHandler(authService, *s.logger)
+
+	api := router.Group("/api/v1") // API v1 routes
+	{
+		// Public routes (no authentication required)
+		auth := api.Group("/auth")
+		{
+			auth.POST("/register", authHandler.Register)
+			auth.POST("/login", authHandler.Login)
+			auth.POST("/refresh", authHandler.RefreshToken)
+			auth.POST("/logout", authHandler.Logout)
+		}
+
+		// Protected routes (authentication required)
+		//protected := api.Group("")
+		//protected.Use(middleware.AuthMiddleware(&s.config.JWT))
+		//{
+		//	// User profile routes
+		//	protected.GET("/profile", s.getProfileHandler)
+		//	protected.PUT("/profile", s.updateProfileHandler)
+		//	protected.POST("/auth/logout", authHandler.Logout)
+		//
+		//	// Admin routes (admin role required)
+		//	admin := protected.Group("/admin")
+		//	admin.Use(middleware.RoleMiddleware("admin"))
+		//	{
+		//		admin.GET("/users", s.listUsersHandler)
+		//		// admin.POST("/products", productHandler.Create)
+		//		// admin.PUT("/products/:id", productHandler.Update)
+		//		// admin.DELETE("/products/:id", productHandler.Delete)
+		//		// admin.GET("/orders", orderHandler.AdminList)
+		//	}
+		//
+		//	// Vendor routes (vendor role required)
+		//	vendor := protected.Group("/vendor")
+		//	vendor.Use(middleware.RoleMiddleware("vendor", "admin"))  // Allow both vendor and admin
+		//	{
+		//		vendor.GET("/products", s.vendorProductsHandler)
+		//		// vendor.POST("/products", productHandler.VendorCreate)
+		//		// vendor.GET("/orders", orderHandler.VendorList)
+		//	}
+		//}
+	}
 
 	return router
 }
