@@ -11,8 +11,8 @@ type ProductService struct {
 	db *gorm.DB
 }
 
-func NewProductService(db *gorm.DB) ProductService {
-	return ProductService{
+func NewProductService(db *gorm.DB) *ProductService {
+	return &ProductService{
 		db: db,
 	}
 }
@@ -36,7 +36,7 @@ func (s *ProductService) CreateCategory(req *dto.CreateCategoryRequest) (*dto.Ca
 	}, nil
 }
 
-func (s *ProductService) getCategories() ([]dto.CategoryResponse, error) {
+func (s *ProductService) GetCategories() ([]dto.CategoryResponse, error) {
 	var categories []models.Category
 	if err := s.db.Find(&categories).Error; err != nil {
 		return nil, err
