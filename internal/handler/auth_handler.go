@@ -83,7 +83,7 @@ func (h *AuthHandler) Logout(c *gin.Context) {
 	err := h.authService.Logout(req.RefreshToken)
 	if err != nil {
 		h.logger.Error().Err(err).Msg("Logout failed")
-		utils.InternalServerErrorResponse(c, "Logout failed")
+		utils.InternalServerErrorResponse(c, "Logout failed", err)
 		return
 	}
 

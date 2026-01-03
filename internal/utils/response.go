@@ -70,17 +70,17 @@ func NotFoundResponse(c *gin.Context, message string) {
 	ErrorResponse(c, http.StatusNotFound, message, nil)
 }
 
-func InternalServerErrorResponse(c *gin.Context, message string) {
-	ErrorResponse(c, http.StatusInternalServerError, message, nil)
+func InternalServerErrorResponse(c *gin.Context, message string, err error) {
+	ErrorResponse(c, http.StatusInternalServerError, message, err)
 }
 
-func PaginatedSuccessResponse(c *gin.Context, message string, data interface{}, meta PaginationMeta) {
+func PaginatedSuccessResponse(c *gin.Context, message string, data interface{}, meta *PaginationMeta) {
 	c.JSON(http.StatusOK, PaginatedResponse{
 		Response: Response{
 			Success: true,
 			Message: message,
 			Data:    data,
 		},
-		Meta: meta,
+		Meta: *meta, // Dereference here
 	})
 }

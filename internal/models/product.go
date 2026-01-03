@@ -29,14 +29,18 @@ type Product struct {
 	Stock       int            `json:"stock" gorm:"default:0"`
 	SKU         string         `json:"sku" gorm:"uniqueIndex;not null"`
 	IsActive    bool           `json:"is_active" gorm:"default:true"`
+	IsOnSale    bool           `json:"is_on_sale" gorm:"default:true"`
+	IsFeatured  bool           `json:"is_featured" gorm:"default:false"`
+	Rating      float64        `json:"rating" gorm:"default:0"`
 	CreatedAt   time.Time      `json:"created_at"`
 	UpdatedAt   time.Time      `json:"updated_at"`
 	DeletedAt   gorm.DeletedAt `json:"-" gorm:"index"` // ✅ Proper soft deletes
 
 	Category   Category       `json:"category" gorm:"foreignKey:CategoryID"` // ✅ Included
 	Images     []ProductImage `json:"images" gorm:"foreignKey:ProductID"`    // ✅ Included
-	OrderItems []OrderItem    `json:"-" gorm:"foreignKey:ProductID"`         // ✅ Excluded
-	CartItems  []CartItem     `json:"-" gorm:"foreignKey:ProductID"`         // ✅ Excluded
+	Tags       []string       `json:"tags" gorm:"foreignKey:ProductID"`
+	OrderItems []OrderItem    `json:"-" gorm:"foreignKey:ProductID"` // ✅ Excluded
+	CartItems  []CartItem     `json:"-" gorm:"foreignKey:ProductID"` // ✅ Excluded
 }
 
 // ProductImage represents an image associated with a product
